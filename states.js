@@ -17,8 +17,10 @@ export class Idle extends State {
         this.player = player;
     }
     enter(){
-        this.player.framey = 5;
-        this.maxFrame = 4;
+        this.player.frameX = 0;
+        this.player.maxFrame = 10;
+        this.player.frameY = 5;
+        
     }
     hanle(input){
         if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
@@ -33,8 +35,9 @@ export class Run extends State {
         this.player = player;
     }
     enter(){
-        this.maxFrame = 10;
-        this.player.framey = 3;
+        this.player.frameX = 0;
+        this.player.maxFrame = 12;
+        this.player.frameY = 3;
         
     }
     hanle(input){
@@ -51,8 +54,9 @@ export class Jump extends State {
     }
     enter(){
         if (this.player.onGround()) this.player.vy -= 27;
-        this.maxFrame = 10;
-        this.player.framey = 1;
+        this.player.frameX = 0;
+        this.player.maxFrame = 10;
+        this.player.frameY = 1;
     }
     hanle(input){
         if (this.player.vy > this.player.weight) {
@@ -67,8 +71,9 @@ export class Fall extends State {
         this.player = player;
     }
     enter(){
-        this.maxFrame = 10;
-        this.player.framey = 2;
+        this.player.frameX = 0;
+        this.player.maxFrame = 10;
+        this.player.frameY = 2;
     }
     hanle(input){
         if (this.player.onGround()) {
