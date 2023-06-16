@@ -24,7 +24,7 @@ export class Idle extends State {
     }
     hanle(input){
         if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-            this.player.setState(states.RUN);
+            this.player.setState(states.RUN, 1);
         }
     }
 }
@@ -42,9 +42,9 @@ export class Run extends State {
     }
     hanle(input){
         if (input.includes('ArrowDown')) {
-            this.player.setState(states.IDLE);
+            this.player.setState(states.IDLE, 0);
         } else if (input.includes('ArrowUp'))
-            this.player.setState(states.JUMP);
+            this.player.setState(states.JUMP, 1);
     }
 }
 export class Jump extends State {
@@ -60,7 +60,7 @@ export class Jump extends State {
     }
     hanle(input){
         if (this.player.vy > this.player.weight) {
-            this.player.setState(states.FALL);
+            this.player.setState(states.FALL, 1);
         }
     }
 }
@@ -77,7 +77,7 @@ export class Fall extends State {
     }
     hanle(input){
         if (this.player.onGround()) {
-            this.player.setState(states.RUN);
+            this.player.setState(states.RUN, 1);
         }
     }
 }

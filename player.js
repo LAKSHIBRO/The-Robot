@@ -46,14 +46,16 @@ export class Player{
         }
     }
     draw(context){
+        if(this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image, this.width*this.frameX, this.height*this.frameY, this.width, this.height, this.x, this.y, this.width, this.height);
 
     }
     onGround(){
         return this.y >= this.game.height - this.height - this.game.groundMargin; 
     }
-    setState(state){
+    setState(state, speed){
         this.currentState = this.states[state];
+        this.game.speed = this.game.maxSpeed * speed;
         this.currentState.enter();
     }
 }
