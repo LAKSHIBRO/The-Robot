@@ -1,4 +1,4 @@
-import { Idle, Run, Jump, Fall } from "./states.js";
+import { Idle, Run, Jump, Fall, Rolling } from "./states.js";
 
 export class Player{
     constructor(game){
@@ -18,12 +18,12 @@ export class Player{
         this.frameTimer = 0;
         this.speed = 0;
         this.maxSpeed = 10;
-        this.states = [new Idle(this), new Run(this), new Jump(this), new Fall(this)];
+        this.states = [new Idle(this), new Run(this), new Jump(this), new Fall(this), new Rolling(this)];
         this.currentState = this.states[0];
         this.currentState.enter();
     }
     update(input, deltaTime){
-
+        this.checkCollision();
         this.currentState.hanle(input);
 
         this.x +=this.speed;
@@ -58,4 +58,20 @@ export class Player{
         this.game.speed = this.game.maxSpeed * speed;
         this.currentState.enter();
     }
+    checkCollision(){
+        this.game.enemies.forEach(enemy => {
+            if (
+                enemy.x < this.x + this.width &&
+                enemy.x + enemy.width > this.x &&
+                enemy.y < this.y + this.height &&
+                enemy.y + enemy.height > this.y
+            ){
+                enemy.markedForDeletion = true;
+                this.game.score++;
+            } else {
+
+            }
+        });
+        }
+    
 }
