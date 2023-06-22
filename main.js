@@ -7,7 +7,7 @@ import { UI } from "./UI.js";
 window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
-    canvas.width = 500;
+    canvas.width = 900;
     canvas.height = 500;
 
     class Game{
@@ -24,22 +24,31 @@ window.addEventListener('load', function () {
             this.enemies = [];
             this.particles = [];
             this.collisions = [];
+            this.messeges = [];
             this.maxParticles = 50;
             this.enemyTimer = 0;
             this.enemyInterval = 1000;
             this.debug = false;
             this.score = 0;
+            this.winningScore = 30;
             this.fontColor = 'black';
             this.time = 0;
-            this.maxTime = 10000;
+            this.maxTime = 30000;
+            this.energy = 0;
+            this.reqEnergy = 5000;
+            this.rollable = true;
             this.gameOver = false;
+            this.lives = 5;
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
-            
         }
         update(deltaTime){
             this.time += deltaTime;
             if (this.time > this.maxTime) this.gameOver = true;
+
+            // if (!this.rollable) this.energy += deltaTime;
+            // if (this.energy >= this.reqEnergy) this.rollable = true;
+    
             this.background.update();
             this.player.update(this.input.keys, deltaTime);
             //handleenemy
@@ -51,13 +60,15 @@ window.addEventListener('load', function () {
             }
             this.enemies.forEach(enemy => {
                 enemy.update(deltaTime);
-                if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
-
             });
+            //handleMesseges
+            this.messeges.forEach(messege => {
+                messege.update();
+            }); 
+
             //handlepartocles
             this.particles.forEach((particle, index)=> {
                 particle.update();
-                if (particle.markedForDeletion) this.particles.splice(index, 1);
             });
             
             if (this.particles.length > this.maxParticles) {
@@ -67,9 +78,12 @@ window.addEventListener('load', function () {
             //handle collisions
             this.collisions.forEach((collision, index) =>{
                collision.update(deltaTime);  
-               if (collision.markedForDeletion) this.collisions.splice(index, 1);
             });
-        }
+            this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
+            this.particles = this.particles.filter(particle => !particle.markedForDeletion);
+            this.collisions = this.collisions.filter(collision => !collision.markedForDeletion);
+            this.messeges = this.messeges.filter(messege => !messege.markedForDeletion);
+        }   
         draw(context){
             this.background.draw(context);
             this.player.draw(context);
@@ -82,9 +96,12 @@ window.addEventListener('load', function () {
             this.collisions.forEach(collision => {
                 collision.draw(context);
             });
-            
+            this.messeges.forEach(messege => {
+                messege.draw(context);
+            }); 
             this.UI.draw(context);
         }
+        
         addEnemy(){
             if (this.speed > 0 && Math.random() < 0.5) this.enemies.push(new GroundEnemy(this));
             else if ( this.speed > 0 ) this.enemies.push(new ClimbingEnemy(this));

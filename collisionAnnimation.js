@@ -4,7 +4,7 @@ export class CollisionAnnimation {
         this.image = document.getElementById('collisionAnnimation');
         this.spriteWidth = 100;
         this.spriteHeight = 90;
-        this.sizeModifier = Math.random() * 0.5;
+        this.sizeModifier = Math.random() * 0.5 + 1;
         this.width = this.spriteWidth * this.sizeModifier;
         this.height = this.spriteHeight * this.sizeModifier;
         this.x = x - this.width * 0.5;
@@ -29,6 +29,5 @@ export class CollisionAnnimation {
             this.frameTimer += deltaTime;
         }
         if (this.frameX > this.maxFrame) this.markedForDeletion = true;
-        console.log(this.game.collisions);
     }
 }

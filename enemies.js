@@ -24,7 +24,15 @@ class Enemy {
 
     }
     draw(context){
-        if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
+        if (this.game.debug) {
+            const centerX = this.x + this.width * 0.5;
+            const centerY = this.y + this.height * 0.5;
+            const radius = Math.max(this.width, this.height) * 0.5 ;
+        
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            context.stroke();
+          }
     context.drawImage(this.image, this.frameX *this.width, 0 ,this.width, this.height, this.x, this.y, this.width, this.height)
     }
 }
