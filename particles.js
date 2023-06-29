@@ -1,9 +1,9 @@
 class Particle {
     constructor(game) {
-    this.game = game;
-    this.markedForDeletion = false;
+        this.game = game;
+        this.markedForDeletion = false;
     }
-    update(){
+    update() {
         this.x -= this.speedX + this.game.speed;
         this.y -= this.speedY;
         this.size *= 0.95;
@@ -12,7 +12,7 @@ class Particle {
 }
 
 export class Dust extends Particle {
-    constructor(game, x, y){
+    constructor(game, x, y) {
         super(game);
         this.size = Math.random() * 10 + 10;
         this.x = x;
@@ -21,7 +21,7 @@ export class Dust extends Particle {
         this.speedY = Math.random();
         this.color = 'rgba(0,0,0,0.2)';
     };
-    draw(context){
+    draw(context) {
         context.beginPath();
         context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         context.fillStyle = this.color;
@@ -29,29 +29,8 @@ export class Dust extends Particle {
     }
 }
 
-export class Splash extends Particle {
-    constructor(game, x, y){
-        super(game);
-        this.size = Math.random() * 100 + 100;
-        this.x = x + this.size * 0.4;
-        this.y = y + this.size * 0.01;
-        this.speedX = Math.random() * 6 - 4;
-        this.speedY = Math.random() * 2 + 1;
-        this.gravity = 0;
-        this.image = document.getElementById('fire');
-    }
-    update(){
-        // super.update();
-        // this.gravity += 0.1;
-        // this.y += this.gravity;
-    }
-    draw(context){
-        //context.drawImage(this.image, this.x, this.y, this.size, this.size);
-    }
-}
-
 export class Fire extends Particle {
-    constructor(game, x, y){
+    constructor(game, x, y) {
         super(game);
         this.image = document.getElementById('fire');
         this.size = Math.random() * 100 + 50;
@@ -62,12 +41,12 @@ export class Fire extends Particle {
         this.angle = 0;
         this.va = Math.random() * 0.4 - 0.2;
     }
-    update(){
+    update() {
         super.update();
         this.angle += this.va;
         this.x += Math.sin(this.angle * 10);
     }
-    draw(context){
+    draw(context) {
         context.save();
         context.translate(this.x, this.y);
         context.rotate(this.angle);

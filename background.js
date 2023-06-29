@@ -1,5 +1,5 @@
 class Layer {
-    constructor(game, width, height, speedModifier, image){
+    constructor(game, width, height, speedModifier, image) {
         this.game = game;
         this.width = width;
         this.height = height;
@@ -8,12 +8,13 @@ class Layer {
         this.x = 0;
         this.y = 0;
     }
-    update(){
+
+    update() {
         if (this.x < -this.width) this.x = 0;
         else this.x -= this.game.speed * this.speedModifier;
 
     }
-    draw(context){
+    draw(context) {
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
         context.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
 
@@ -21,7 +22,7 @@ class Layer {
 }
 
 export class Background {
-    constructor(game){
+    constructor(game) {
         this.game = game;
         this.width = 1667;
         this.height = 500;
@@ -31,20 +32,20 @@ export class Background {
         this.layer4image = document.getElementById('layer4');
         this.layer5image = document.getElementById('layer5');
         this.layer1 = new Layer(this.game, this.width, this.height, 0, this.layer1image);
-        this.layer2 = new Layer(this.game, this.width, this.height, 0.2, this.layer2image);
-        this.layer3 = new Layer(this.game, this.width, this.height, 0.4, this.layer3image);
-        this.layer4 = new Layer(this.game, this.width, this.height, 0.8, this.layer4image);
+        this.layer2 = new Layer(this.game, this.width, this.height, 0.23, this.layer2image);
+        this.layer3 = new Layer(this.game, this.width, this.height, 0.5, this.layer3image);
+        this.layer4 = new Layer(this.game, this.width, this.height, 0.75, this.layer4image);
         this.layer5 = new Layer(this.game, this.width, this.height, 1, this.layer5image);
         this.backgroundLayers = [this.layer1, this.layer2, this.layer3, this.layer4, this.layer5];
 
     }
-    update(){
-        this.backgroundLayers.forEach(layer =>{
+    update() {
+        this.backgroundLayers.forEach(layer => {
             layer.update();
         })
     }
-    draw(context){
-        this.backgroundLayers.forEach(layer =>{
+    draw(context) {
+        this.backgroundLayers.forEach(layer => {
             layer.draw(context);
         })
     }

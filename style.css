@@ -1,7 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background-color: #28262C;
 }
 
 #canvas1 {
@@ -9,11 +13,130 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 900px;
+    height: 500px;
     transform: translate(-50%, -50%);
     max-width: 100%;
     max-height: 100%;
     font-family: 'Black Ops One', cursive;
 }
-#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy_fly, #enemy_plant, #enemy_spider, #fire, #collisionAnnimation, #lives{
+
+#page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#player,
+#layer1,
+#layer2,
+#layer3,
+#layer4,
+#layer5,
+#enemy_fly,
+#enemy_plant,
+#fire,
+#collisionAnnimation,
+#lives {
     display: none;
+}
+
+#back {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+}
+
+#nextButton {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    left: 15%;
+    margin-top: 100px;
+    margin-left: -120px;
+
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 124px;
+
+    border: 0;
+    color: #000a47;
+    background: #ffffff;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+#nextButton:hover {
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 #000a47, 0 0 0 3px #1de9b6;
+}
+
+
+h1 {
+    position: absolute;
+    z-index: 8;
+    font-family: 'Black Ops One', cursive;
+    color: #1de9b6;
+    font-size: 100px;
+    margin-top: 150px;
+    margin-left: 50px;
+}
+
+h3 {
+    position: absolute;
+    z-index: 4;
+    font-family: impact;
+    font-weight: 300;
+    font-size: 40px;
+    color: #ffffff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 280px;
+    margin-left: 300px;
+}
+
+#screen {
+    position: absolute;
+    z-index: 8;
+    width: 400px;
+    margin-top: 300px;
+    margin-left: 600px;
+
+}
+
+#retry {
+    position: absolute;
+    visibility: hidden;
+    z-index: 6;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 280px;
+    margin-left: 283px;
+
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 124px;
+
+    border: 0;
+    color: #000a47;
+    background: #ffffff;
+    line-height: 1.15;
+    font-size: 16px;
+}
+
+#retry:hover {
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 #000a47, 0 0 0 3px #1de9b6;
 }
